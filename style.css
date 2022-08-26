@@ -1,0 +1,201 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+.body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.container_left{
+    background-color: black;
+    color: white;
+    width: 20%;
+    padding-left: 15px;
+    height: -webkit-fill-available;
+    position: fixed;
+}
+.container_left .main_logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 25px;
+}
+.container_left .main_logo p{
+    font-size: 24px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+.container_left .main_logo img{
+    width: 60px;
+    height: 45px;
+    object-fit: contain;
+}
+.container_left .list_feature{
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.container_left .list_feature .feature_top ul li a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.container_left .list_feature .feature_top ul li a i{
+    color: #b3b3b3;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+.container_left .list_feature .feature_top ul li a p{
+    color: #b3b3b3;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.container_left .list_feature .feature_bottom {
+    margin-top: 30px;
+}
+.container_left .list_feature .feature_bottom ul li a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.container_left .list_feature .feature_bottom ul li a i{
+    color: #b3b3b3;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+.container_left .list_feature .feature_bottom ul li a p{
+    color: #b3b3b3;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.list_playlist{
+    width: 90%;
+    border-top: 1px solid #282828;
+}
+.list_playlist p{
+    margin-top: 10px;
+    color: #b3b3b3;
+}
+.container_right{
+    width: 80%;
+    margin-left: 20%;
+    background-image: linear-gradient(to right, #1f1f1f , #1e1e1e);
+    color: white;
+    height: auto;
+}
+.container_right .header{
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+}
+.container_right .header .direction{
+    margin-left: 30px;
+}
+.container_right .header .direction a{
+    background-color: black;
+    margin-right: 20px;
+    padding: 15px 15px 10px 15px;
+    border-radius: 100%;
+}
+.container_right .header .direction a i{
+    font-size: 24px;
+    color: #b3b3b3;
+}
+.container_right .header .header_content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header_content button{
+    background-color: inherit;
+    border: 1px solid #b3b3b3;
+    padding: 5px 15px;
+    margin-right: 30px;
+    color: white;
+    border-radius: 15px;
+    font-weight: 600;
+}
+.header_nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    margin-right: 20px;
+    padding: 3px 15px 3px 3px;
+    border-radius: 25px;
+}
+.header_nav img{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    object-fit: contain;
+    margin-right: 10px;
+}
+.header_nav p{
+    margin-right: 10px;
+}
+.header_nav i{
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+.playlist{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.playlist .playlist_head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.playlist_head h3{
+    font-size: 24px;
+    font-weight: 600;
+}
+.playlist_head p{
+    margin-right: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+.playlist .playlist_contain{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+.playlist_contain .playlist_box{
+    padding: 20px 15px 20px 15px;
+    background-image: linear-gradient(to bottom , #171717 , #181818);
+    margin-right: 15px;
+    border-radius: 5px;
+}
+.playlist_contain .playlist_box img{
+    height: 140px;
+    width: 140px;
+    border-radius: 5px;
+}
