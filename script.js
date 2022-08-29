@@ -37,21 +37,20 @@ const APIController=(
             const data = await result.json();
             return data.playlists.items;
         }
-        //get Image of playlist
-        const getImagePlaylist = async (token, playlist_id) => {
+        const getTracks = async (token, tracksEndPoint) => {
 
             const limit = 10;
-            
-            const result = await fetch(`https://api.spotify.com/v1/playlists/{playlist_id}/images`, {
+    
+            const result = await fetch(`${tracksEndPoint}?limit=${limit}`, {
                 method: 'GET',
                 headers: { 'Authorization' : 'Bearer ' + token}
             });
     
             const data = await result.json();
-            return data;
+            return data.items;
         }
     
-        const _getTrack = async (token, trackEndPoint) => {
+        const getTrack = async (token, trackEndPoint) => {
     
             const result = await fetch(`${trackEndPoint}`, {
                 method: 'GET',
@@ -111,26 +110,30 @@ const UIController = (function() {
             }
         },
         createListGenre(text,value){
+            let id = value.slice(1,value.length).toLowerCase();
             const html = `<div class="playlist">
             <div class="playlist_head">
                 <h3 id="select_genre">${text}</h3>
                 <p><a href="#">see all</a></p>
             </div>
-            <div class="playlist_contain" id="${value}"></div>
+            <div class="playlist_contain" id="${id}"></div>
             
         </div>`;
         document.querySelector(DOMElements.selectGenre).insertAdjacentHTML('beforeend', html);
         },
-        createPlaylist(name,href,images){
+        createPlaylist(name,href,images,iden){
+            let id = "#"+iden.slice(1,iden.length).toLowerCase();
             const html = `
             <div class="playlist_box">
+                <a href="${href}">
                 <img src="${images}" alt="images playlist">
                 <p>${name}</p>
                 <p>author</p>
+                </a>
             </div>
             `;
-        document.querySelector(DOMElements.selectPlaylist).insertAdjacentHTML('beforeend', html);
-        },
+            document.querySelector(id).insertAdjacentHTML('beforeend', html);
+        }
        
     }
 
@@ -148,13 +151,19 @@ const APPController = (function(UICtrl, APICtrl) {
         //UICtrl.storeToken(token);
         //get the genres
         const genres = await APICtrl.getGenres(token);
+        var agend = [];
         //populate our genres select element
-        genres.forEach(element => UICtrl.createListGenre(element.name,element.id));
-        //get playlist of genres
+        genres.forEach(element => {UICtrl.createListGenre(element.name,element.id),
+        console.log(element.id),
+        agend.push(element.id)
+       });
+       console.log(agend);
+       for(var i=0;i<agend.length;i++){
+        console.log(agend[i]);
+        const playlist = await APICtrl.getPlaylistByGenre(token,agend[i]);
+        playlist.forEach(ele => UICtrl.createPlaylist(ele.name, ele.tracks.href,ele.images[0].url,agend[i]))
+       }
         
-        const playlist = await APICtrl.getPlaylistByGenre(token,element.id);
-        //const playlist_image = await APICtrl.getImagePlaylist(token,element.id);
-        playlist.forEach(ele => UICtrl.createPlaylist(ele.name, ele.tracks.href,ele.images));
     }
     return {
         init() {
