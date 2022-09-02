@@ -89,7 +89,7 @@ const UIController = (function() {
         selectGenre :'.container_right',
         //selectGenre: '#select_genre',
         selectPlaylist: '#select_playlist',
-        //buttonSubmit: '#btn_submit',
+        playlist_box: '.playlist_box',
         //divSongDetail: '#song-detail',
         //hfToken: '#hidden_token',
        // divSonglist: '.song-list'
@@ -165,6 +165,7 @@ const APPController = (function(UICtrl, APICtrl) {
        }
         
     }
+    //click and
     return {
         init() {
             console.log('App is starting');
