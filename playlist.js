@@ -97,6 +97,28 @@ const UIController = (
             </div>
             `;
             document.querySelector(".container_playlist").insertAdjacentHTML('beforeend', html);
+            },
+            createTrackDetail(name,album,artist,date,images,time){
+                const minute = changeToMinute(Number(time));
+                const html = 
+            `
+            <div class="songs">
+                    <div class="songs_title">
+                        <p>1</p>
+                        <img src="${images}">
+                        <div class="name_title">
+                            <h3>${name}</h3>
+                            <p>${artist}</p>
+                        </div>
+                    </div>
+                    <div class="album_title">
+                        <p>${album}</p>
+                    </div>
+                    <p>${date}</p>
+                    <p>${minute}</p>
+            </div>
+            `;
+            document.querySelector(".container_playlist").insertAdjacentHTML('beforeend', html);
             }
         }
     }
@@ -110,12 +132,14 @@ const APPController = (function(UICtrl, APICtrl) {
         const track = await APICtrl.getTracksDemo(token);
         //
         const trackDetailLink=[];
-        track.forEach(element => {UICtrl.createListTrack(element.track.name,element.track.href),
+        track.forEach(element => /*{UICtrl.createListTrack(element.track.name,element.track.href),*/{
         trackDetailLink.push(element.track.href)}
         );
-        for(let i=0;i<trackDetailLink.length;i++){
-            const trackdetail = await APICtrl.getTrackDetail(token,trackDetailLink[i]);
+        console.log(trackDetailLink);
+        for(var i=0;i<trackDetailLink.length;i++){
             console.log(trackDetailLink[i]);
+            const track = await APICtrl.getTrackDetail(token,trackDetailLink[i]);
+            UICtrl.createTrackDetail(track.name,track.album.name,track.artists[0].name,track.album.release_date,track.album.images[2].url,track.duration_ms);
         }
 
     }
@@ -130,3 +154,12 @@ const APPController = (function(UICtrl, APICtrl) {
 })(UIController, APIController);
 // will need to call a method to load the genres on page load
 APPController.init();
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
+function changeToMinute(milliseconds){
+    const minutes = Math.floor(milliseconds/60000);
+    const seconds = Math.floor((milliseconds%60000)/1000);
+    return seconds === 60 ? `${minutes + 1}:00`
+    : `${minutes}:${padTo2Digits(seconds)}`;
+}
